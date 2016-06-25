@@ -21,6 +21,9 @@ function sendForm (e) {
     if (form[0].value !== '') {
       form[0].value = '';
     }
+    if (form[1].files.length === 0) {
+      return false;
+    }
   }
   var fd = new FormData(form);
 
