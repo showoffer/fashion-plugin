@@ -1,0 +1,202 @@
+{
+  "errors": [
+
+  ],
+  "results": [
+    {
+      "category": "bags",
+      "products": [
+        {
+          "distance": "NaN",
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/zign-tote-bag-natural-zi151ha0p-b11.html",
+          "uid": "ZI151HA0P-B11",
+          "name": "Tote bag - natural",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i6.ztat.net/detail_hd/ZI/15/1H/A0/PB/11/ZI151HA0P-B11@10.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.18568992614746094,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/whistles-perry-clutch-brown-wh051h00l-o11.html",
+          "uid": "WH051H00L-O11",
+          "name": "PERRY - Clutch - brown",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i1.ztat.net/detail_hd/WH/05/1H/00/LO/11/WH051H00L-O11@10.1.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.2085399031639099,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/matt-nat-fabi-rucksack-chili-m0351h00o-o11.html",
+          "uid": "M0351H00O-O11",
+          "name": "FABI - Rucksack - chili",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i6.ztat.net/detail_hd/M0/35/1H/00/OO/11/M0351H00O-O11@10.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.2270873785018921,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/dkny-tribeca-handbag-dk151h05v-o11.html",
+          "uid": "DK151H05V-O11",
+          "name": "TRIBECA - Handbag - dark camel",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i4.ztat.net/detail_hd/DK/15/1H/05/VO/11/DK151H05V-O11@9.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.2810021638870239,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/kiomi-handbag-sand-k4451ha0y-b11.html",
+          "uid": "K4451HA0Y-B11",
+          "name": "Across body bag - sand",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i3.ztat.net/detail_hd/K4/45/1H/A0/YB/11/K4451HA0Y-B11@10.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.2949371933937073,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/zign-rucksack-tan-zi151ha0v-b11.html",
+          "uid": "ZI151HA0V-B11",
+          "name": "Rucksack - tan",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i4.ztat.net/detail_hd/ZI/15/1H/A0/VB/11/ZI151HA0V-B11@9.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.29504430294036865,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/kiomi-rucksack-camel-k4451ha0f-b11.html",
+          "uid": "K4451HA0F-B11",
+          "name": "Rucksack - camel",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i4.ztat.net/detail_hd/K4/45/1H/A0/FB/11/K4451HA0F-B11@8.1.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.29805898666381836,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/zign-tote-bag-cognac-zi151ha0i-o11.html",
+          "uid": "ZI151HA0I-O11",
+          "name": "Tote bag - cognac",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i2.ztat.net/detail_hd/ZI/15/1H/A0/IO/11/ZI151HA0I-O11@15.1.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.3045080304145813,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/anna-field-across-body-bag-brown-an651ha03-o11.html",
+          "uid": "AN651HA03-O11",
+          "name": "Across body bag - brown",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i2.ztat.net/detail_hd/AN/65/1H/A0/3O/11/AN651HA03-O11@10.jpg"
+            }
+          ]
+        },
+        {
+          "distance": 0.31335586309432983,
+          "gender": "female",
+          "category": {
+            "name": "bags",
+            "subcategory": {
+              "name": null
+            }
+          },
+          "productUrl": "https://www.zalando.co.uk/kiomi-across-body-bag-camel-k4451ha0d-b11.html",
+          "uid": "K4451HA0D-B11",
+          "name": "Tote bag - camel",
+          "customData": null,
+          "images": [
+            {
+              "imageUrl": "https://i4.ztat.net/detail_hd/K4/45/1H/A0/DB/11/K4451HA0D-B11@9.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
