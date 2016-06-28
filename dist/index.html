@@ -1,0 +1,66 @@
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation for Sites</title>
+    <link rel="stylesheet" href="assets/css/app.css">
+  </head>
+  <body>
+
+    
+    <div class="expanded row adz-main-container">
+      <div class="row adz-header">
+        <div class="large-12 columns">
+          <h1 class="subheader">Adzuki Fashion</h1>
+        </div>
+      </div>
+    
+      <div class="row adz-subheader mb10">
+        <div class="large-12 columns text-center">
+          <h2 class="subheader">Please upload your image</h2>
+          <div>Bring the right people - in front of the right product - at the right time </div>
+        </div>
+      </div>
+    
+      <div class="small-11 medium-8 large-6 center-container">
+        <form enctype="multipart/form-data" id="image-form">
+          <div class="row">
+            <div class="input-group">
+              <input class="input-group-field" name="file-url" type="url" placeholder="http://adzukimobile.com/image.jpg  ">
+              <a class="input-group-button button" id="submit-url">Submit</a>
+            </div>
+            <div class="text-center">
+              <div>- or -</div>
+              <br>
+              <label for="file-img" class="button">Upload File</label>
+              <input  type="file" accept="image/*" id="file-img" name="file-img" class="show-for-sr">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="row large-6 medium-8 center-container" id="results-container">
+      <h4 class="medium-6 center-container text-center" id="adz-msg-place">
+    
+      </h4>
+      <div class="small-3  columns">
+        <img class="thumbnail" src="" alt="">
+      </div>
+      <div class="small-3  columns">
+        <img class="thumbnail" src="" alt="">
+      </div>
+      <div class="small-3  columns">
+        <img class="thumbnail" src="" alt="">
+      </div>
+      <div class="small-3  columns">
+        <img class="thumbnail" src="" alt="">
+      </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

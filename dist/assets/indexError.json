@@ -1,0 +1,11 @@
+{
+  "errors": [
+    "123", "456"
+  ],
+  "results": [
+    {
+      "category": "bags",
+      "products": null
+    }
+  ]
+}
