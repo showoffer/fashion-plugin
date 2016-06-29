@@ -29,7 +29,7 @@
         <form enctype="multipart/form-data" id="image-form">
           <div class="row">
             <div class="input-group">
-              <input class="input-group-field" name="file-url" type="url" placeholder="http://adzukimobile.com/image.jpg  ">
+              <input class="input-group-field" name="file-url" type="url" placeholder="http://adzukimobile.com/image.jpg">
               <a class="input-group-button button" id="submit-url">Submit</a>
             </div>
             <div class="text-center">
@@ -43,23 +43,50 @@
       </div>
     </div>
     
-    <div class="row large-6 medium-8 center-container" id="results-container">
-      <h4 class="medium-6 center-container text-center" id="adz-msg-place">
+    <div class="row large-8 medium-10 center-container">
+      <div class="large-3 medium-5 columns">
+        <h4 class="row text-center" id="adz-search-msg-place"></h4>
+        <div class="small-8 medium-12 large-12 center-container">
+          <img class="thumbnail" id="search-by" src="" alt="">
+        </div>
+      </div>
+      <div class="large-9 medium-7 columns" id="results-container">
+        <h4 class="row text-center" id="adz-msg-place"></h4>
+        <div class="small-6 large-3 columns">
+          <img class="thumbnail" src="" alt="">
+        </div>
+        <div class="small-6 large-3 columns">
+          <img class="thumbnail" src="" alt="">
+        </div>
+        <div class="small-6 large-3 columns">
+          <img class="thumbnail" src="" alt="">
+        </div>
+        <div class="small-6 large-3 columns">
+          <img class="thumbnail" src="" alt="">
+        </div>
+      </div>
     
-      </h4>
-      <div class="small-3  columns">
-        <img class="thumbnail" src="" alt="">
-      </div>
-      <div class="small-3  columns">
-        <img class="thumbnail" src="" alt="">
-      </div>
-      <div class="small-3  columns">
-        <img class="thumbnail" src="" alt="">
-      </div>
-      <div class="small-3  columns">
-        <img class="thumbnail" src="" alt="">
+    </div>
+    
+    <div class="spinner-wrap undisplay">
+      <div class="spinner">
+        <div class="sk-fading-circle">
+          <div class="sk-circle1 sk-circle"></div>
+          <div class="sk-circle2 sk-circle"></div>
+          <div class="sk-circle3 sk-circle"></div>
+          <div class="sk-circle4 sk-circle"></div>
+          <div class="sk-circle5 sk-circle"></div>
+          <div class="sk-circle6 sk-circle"></div>
+          <div class="sk-circle7 sk-circle"></div>
+          <div class="sk-circle8 sk-circle"></div>
+          <div class="sk-circle9 sk-circle"></div>
+          <div class="sk-circle10 sk-circle"></div>
+          <div class="sk-circle11 sk-circle"></div>
+          <div class="sk-circle12 sk-circle"></div>
+        </div>
       </div>
     </div>
+    
 
     <script src="assets/js/app.js"></script>
   </body>

@@ -4,6 +4,8 @@
 @import 'foundation';
 @import 'motion-ui';
 
+@import '../../../bower_components/spinkit/scss/spinners/10-fading-circle';
+
 @include foundation-global-styles;
 @include foundation-grid;
 // @include foundation-flex-grid;
@@ -83,4 +85,28 @@
 
 .adz-main-container .subheader {
   color: white;
+}
+
+.undisplay {
+  display: none;
+}
+
+.spinner-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, .7);
+}
+
+.spinner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 60px;
+  height: 60px;
 }

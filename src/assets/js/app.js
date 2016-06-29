@@ -5,18 +5,25 @@ var OPTS = {
   imgId: 'file-img',
   contId: 'results-container',
   msgPlaceId: 'adz-msg-place',
+  searchMsgPlaceId: 'adz-search-msg-place',
   submitUrlId: 'submit-url',
+  searchImgId: 'search-by',
+  spinnerCls: 'spinner-wrap',
   uriOk: '/assets/index.json',
   uriFail: '/assets/indexError.json'
 };
 
-$('#' + OPTS.imgId).on('change', sendForm);
-$('#' + OPTS.submitUrlId).on('click', sendForm);
+$('#' + OPTS.imgId).on('change', commonHandler);
+$('#' + OPTS.submitUrlId).on('click', commonHandler);
 
-function sendForm (e) {
-  var uri = OPTS.uriOk;
-  // var xhr = new XMLHttpRequest();
+function commonHandler (e) {
   var form = document.getElementById(OPTS.formId);
+  clearInputs(e, form);
+  readImg(form);
+  sendForm(e, form);
+}
+
+function clearInputs (e, form) {
   if (e.type === 'change') {
     if (form[0].value !== '') {
       form[0].value = '';
@@ -25,7 +32,14 @@ function sendForm (e) {
       return false;
     }
   }
+}
+
+function sendForm (e, form) {
+  var uri = OPTS.uriOk;
+  // var xhr = new XMLHttpRequest();
   var fd = new FormData(form);
+
+  setSpinner(true);
 
   $.ajax({
     url: uri,
@@ -34,6 +48,7 @@ function sendForm (e) {
     type: 'GET',
     success: function(data){
       handleResponse(data, true);
+      setSpinner(false);
     }
   });
 
@@ -57,7 +72,7 @@ function handleResponse (resObj, staticRandom) {
       var resLength = res.length,
         randData;
       if (res.length > 0) {
-        setMessage('Results:');
+        setMessage(OPTS.msgPlaceId, 'Results:');
         for (i = 0; i < imLgth; i++) {
           if (staticRandom) {
             randData = res[getRandomInt(0, resLength - 1)];
@@ -67,7 +82,7 @@ function handleResponse (resObj, staticRandom) {
           }
         }
       } else {
-        setMessage('No matches in DB');
+        setMessage(OPTS.msgPlaceId, 'No matches in DB');
       }
     } else {
       handleErrors(resObj, 'No response data');
@@ -86,9 +101,9 @@ function handleErrors (resObj, msg) {
       for (i = 0; i < erLgth; i++) {
         erStr += errors[i] + '<br/>';
       }
-      setMessage(erStr);
+      setMessage(OPTS.msgPlaceId, erStr);
     } else {
-      setMessage(msg);
+      setMessage(OPTS.msgPlaceId, msg);
     }
   }
 }
@@ -106,6 +121,32 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function setMessage (msg) {
-  $('#' + OPTS.msgPlaceId).html(msg);
+function setMessage (containerId, msg) {
+  $('#' + containerId).html(msg);
+}
+
+function setSpinner(bool) {
+  var spinnerWrap = $('.' + OPTS.spinnerCls);
+  bool ? spinnerWrap.removeClass('undisplay') : spinnerWrap.addClass('undisplay');
+}
+
+function readImg(form) {
+
+  if (form[0].value !== '') {
+    $('#' + OPTS.searchImgId)
+      .attr('src', form[0].value);
+  }
+  if (form[1].files.length > 0) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      $('#' + OPTS.searchImgId)
+        .attr('src', e.target.result)
+    };
+
+    reader.readAsDataURL(form[1].files[0]);
+  }
+
+  setMessage(OPTS.searchMsgPlaceId, 'Search by:');
+
 }
