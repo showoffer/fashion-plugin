@@ -1,20 +1,43 @@
 $(document).foundation();
 
 var OPTS = {
+  bbox: null,
+  annotation: null,
+  img: null,
   formId: 'image-form',
   imgId: 'file-img',
+  imgTextId: 'file-url',
   contId: 'results-container',
   msgPlaceId: 'adz-msg-place',
+  searchByBtn: 'searchByBtn',
   searchMsgPlaceId: 'adz-search-msg-place',
   submitUrlId: 'submit-url',
   searchImgId: 'search-by',
   spinnerCls: 'spinner-wrap',
+  canvasContainerId: 'canvas-wrapper',
   uriOk: '/assets/index.json',
   uriFail: '/assets/indexError.json'
 };
 
-$('#' + OPTS.imgId).on('change', commonHandler);
-$('#' + OPTS.submitUrlId).on('click', commonHandler);
+$('#' + OPTS.imgId).on('change', function (e) {
+  if (OPTS.bbox !== null) {
+    OPTS.bbox.dispose();
+  }
+  readImgFile(getById(OPTS.imgId), getById(OPTS.canvasContainerId), populateCanvas);
+});
+$('#' + OPTS.searchByBtn).on('click', function (e) {
+  var a = OPTS.annotation,
+    imageData = prepareImgData(getBboxCanvas, a),
+    canvas = createCanvasFromData(imageData);
+
+  console.log(imageData, canvas);
+
+  setSearchByImage(canvas);
+});
+$('#' + OPTS.submitUrlId).on('click', function (e) {
+  e.preventDefault();
+  readImgText(OPTS.imgTextId, getById, populateCanvas);
+});
 
 function commonHandler (e) {
   var form = document.getElementById(OPTS.formId);
@@ -34,10 +57,10 @@ function clearInputs (e, form) {
   }
 }
 
-function sendForm (e, form) {
+function sendForm (image) {
   var uri = OPTS.uriOk;
   // var xhr = new XMLHttpRequest();
-  var fd = new FormData(form);
+  var fd = new FormData();
 
   setSpinner(true);
 
@@ -149,4 +172,99 @@ function readImg(form) {
 
   setMessage(OPTS.searchMsgPlaceId, 'Search by:');
 
+}
+
+function readImgText(fldId, getF, populateF) {
+  var
+    image = document.createElement('img'),
+    canvasCont = getF(OPTS.canvasContainerId);
+  image.onload = function () {
+    populateF(image, canvasCont, saveBbox, saveAnnotation);
+  };
+  image.setAttribute('src', getF(fldId).value);
+}
+
+function readImgFile(field, canvasCont, populateCanvas) {
+  var image = document.createElement('img'),
+    reader = new FileReader();
+  reader.onload = function (e) {
+    image.onload = function () {
+      OPTS.img = image;
+      populateCanvas(image, canvasCont, saveBbox, saveAnnotation);
+    };
+    image.setAttribute('src', e.target.result);
+  };
+  reader.readAsDataURL(field.files[0]);
+}
+
+function populateCanvas (image, canvasCont, saveBbox, saveAnnotation) {
+  var bbox = Bbox({
+    canvasContainer: canvasCont,
+    img: image,
+    onload: function () { console.log('loaded!') }
+  });
+  bbox.subscribe(function (annotation) {
+    saveAnnotation(annotation)
+  });
+  saveBbox(bbox);
+}
+
+function setImgAttrs (imgObj, attrs) {
+  var i = 0,
+    attrsLgth = attrs.length;
+
+  if (attrs.length > 0) {
+    for (i; i < attrsLgth; i++) {
+      imgObj[attrs[i].name] = attrs[i].value;
+    }
+  }
+
+  return imgObj;
+
+}
+
+function getById (id) {
+  return document.getElementById(id);
+}
+
+function saveBbox (bbox) {
+  OPTS.bbox = bbox;
+  return bbox;
+}
+
+function saveAnnotation (annotation) {
+  OPTS.annotation = annotation;
+  return annotation;
+}
+
+function getBboxCanvas () {
+  var canvasCont = getById(OPTS.canvasContainerId),
+    canvas = canvasCont.getElementsByTagName('canvas')[0];
+  return canvas;
+}
+
+function prepareImgData (getCanvas, annotation) {
+  var a = annotation,
+    img = OPTS.img,
+    canvas = document.createElement('CANVAS'),
+    ctx = canvas.getContext('2d');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  ctx.drawImage(img, 0, 0, img.width, img.height);
+  return ctx.getImageData(a.x1, a.y1, a.x2 - a.x1, a.y2 - a.y1);
+}
+
+function createCanvasFromData (imageData, annotation) {
+  var a = annotation,
+    canvas = document.createElement('CANVAS'),
+    ctx = canvas.getContext('2d');
+  canvas.width = imageData.width;
+  canvas.height = imageData.height;
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
+function setSearchByImage (canvas) {
+  document.getElementById(OPTS.searchImgId)
+    .setAttribute('src', canvas.toDataURL("image/png"));
 }
