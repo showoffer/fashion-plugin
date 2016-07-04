@@ -10,12 +10,7 @@
   </head>
   <body>
 
-    
-    <div id="canvas-wrapper" style="width: 500px; height: 500px; margin: 60px auto;">
-    </div>
-    
-    <button id="searchByBtn">Search</button>
-    
+  <div id="content">
     <div class="expanded row adz-main-container">
       <div class="row adz-header">
         <div class="large-12 columns">
@@ -23,54 +18,60 @@
         </div>
       </div>
     
-      <div class="row adz-subheader mb10">
-        <div class="large-12 columns text-center">
-          <h2 class="subheader">Please upload your image</h2>
-          <div>Bring the right people - in front of the right product - at the right time </div>
-        </div>
-      </div>
-    
-      <div class="small-11 medium-8 large-6 center-container">
-        <form enctype="multipart/form-data" id="image-form">
-          <div class="row">
-            <div class="input-group">
-              <input class="input-group-field" name="file-url" id="file-url" type="url" placeholder="http://adzukimobile.com/image.jpg">
-              <a class="input-group-button button" id="submit-url">Submit</a>
-            </div>
-            <div class="text-center">
-              <div>- or -</div>
-              <br>
-              <label for="file-img" class="button">Upload File</label>
-              <input  type="file" accept="image/*" id="file-img" name="file-img" class="show-for-sr">
+      <div class="row">
+        <div class="medium-10 center-container">
+          <div class="adz-subheader mb10">
+            <div class="large-12 columns text-center">
+              <h2 class="subheader">Please upload your image</h2>
+              <div>Bring the right people - in front of the right product - at the right time </div>
             </div>
           </div>
-        </form>
+          <div class="small-11 medium-8 large-6 center-container">
+            <form enctype="multipart/form-data" id="image-form">
+              <div class="row">
+                <div class="input-group">
+                  <input class="input-group-field" name="file-url" id="file-url" type="url" placeholder="http://adzukimobile.com/image.jpg">
+                  <a class="input-group-button button" id="submit-url">Submit</a>
+                </div>
+                <div class="text-center">
+                  <div>- or -</div>
+                  <br>
+                  <label for="file-img" class="button">Upload File</label>
+                  <input  type="file" accept="image/*" id="file-img" name="file-img" class="show-for-sr">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
+    
+      <div class="row">
+        <div class="small-8 medium-6 large-4 center-container undisplay">
+          <div id="canvas-wrapper" class=""></div>
+          <div class="text-center mt10">
+            <a class="button" id="searchByBtn">Search</a>
+          </div>
+        </div>
+      </div>
+    
     </div>
     
-    <div class="row large-8 medium-10 center-container">
-      <div class="large-3 medium-5 columns">
-        <h4 class="row text-center" id="adz-search-msg-place"></h4>
-        <div class="small-8 medium-12 large-12 center-container">
-          <img class="thumbnail" id="search-by" src="" alt="">
-        </div>
-      </div>
-      <div class="large-9 medium-7 columns" id="results-container">
-        <h4 class="row text-center" id="adz-msg-place"></h4>
-        <div class="small-6 large-3 columns">
-          <img class="thumbnail" src="" alt="">
-        </div>
-        <div class="small-6 large-3 columns">
-          <img class="thumbnail" src="" alt="">
-        </div>
-        <div class="small-6 large-3 columns">
-          <img class="thumbnail" src="" alt="">
-        </div>
-        <div class="small-6 large-3 columns">
-          <img class="thumbnail" src="" alt="">
-        </div>
-      </div>
+    <div class="row large-6 medium-8 center-container" id="results-container">
+      <h4 class="medium-6 center-container text-center" id="adz-msg-place">
     
+      </h4>
+      <div class="small-3  columns">
+        <img class="thumbnail" src="" alt="">
+      </div>
+      <div class="small-3  columns">
+        <img class="thumbnail" src="" alt="">
+      </div>
+      <div class="small-3  columns">
+        <img class="thumbnail" src="" alt="">
+      </div>
+      <div class="small-3  columns">
+        <img class="thumbnail" src="" alt="">
+      </div>
     </div>
     
     <div class="spinner-wrap undisplay">
@@ -91,7 +92,8 @@
         </div>
       </div>
     </div>
-    
+  </div>
+
 
 
     <script src="assets/libs/we-bbox/index.min.js"></script>

@@ -29,10 +29,9 @@ $('#' + OPTS.searchByBtn).on('click', function (e) {
   var a = OPTS.annotation,
     imageData = prepareImgData(getBboxCanvas, a),
     canvas = createCanvasFromData(imageData);
-
-  console.log(imageData, canvas);
-
-  setSearchByImage(canvas);
+  console.log(imageData);
+  // setSearchByImage(canvas);
+  sendForm(canvas);
 });
 $('#' + OPTS.submitUrlId).on('click', function (e) {
   e.preventDefault();
@@ -57,10 +56,12 @@ function clearInputs (e, form) {
   }
 }
 
-function sendForm (image) {
+function sendForm (canvas) {
   var uri = OPTS.uriOk;
-  // var xhr = new XMLHttpRequest();
   var fd = new FormData();
+  var imgFile = canvas.toDataURL();
+
+  fd.append('file-img', imgFile);
 
   setSpinner(true);
 
@@ -72,16 +73,10 @@ function sendForm (image) {
     success: function(data){
       handleResponse(data, true);
       setSpinner(false);
+      $("html, body").animate({ scrollTop: $(document).height() }, 1500);
     }
   });
 
-  // xhr.open("GET", uri, true);
-  // xhr.onreadystatechange = function() {
-  //   if (xhr.readyState == 4 && xhr.status == 200) {
-  //     handleResponse(xhr.responseText, true);
-  //   }
-  // };
-  // xhr.send(fd);
 }
 
 function handleResponse (resObj, staticRandom) {
@@ -187,9 +182,12 @@ function readImgText(fldId, getF, populateF) {
 function readImgFile(field, canvasCont, populateCanvas) {
   var image = document.createElement('img'),
     reader = new FileReader();
+  $(canvasCont).parent().removeClass('undisplay');
+  setSpinner(true);
   reader.onload = function (e) {
     image.onload = function () {
       OPTS.img = image;
+      $(canvasCont).height($(canvasCont).width() * image.height / image.width);
       populateCanvas(image, canvasCont, saveBbox, saveAnnotation);
     };
     image.setAttribute('src', e.target.result);
@@ -201,11 +199,14 @@ function populateCanvas (image, canvasCont, saveBbox, saveAnnotation) {
   var bbox = Bbox({
     canvasContainer: canvasCont,
     img: image,
-    onload: function () { console.log('loaded!') }
+    onload: function () {
+      setSpinner(false);
+    }
   });
   bbox.subscribe(function (annotation) {
     saveAnnotation(annotation)
   });
+  saveAnnotation({x1: 0, x2: $(canvasCont).width(), y1: 0, y2: $(canvasCont).height()});
   saveBbox(bbox);
 }
 

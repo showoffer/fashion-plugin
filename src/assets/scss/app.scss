@@ -83,6 +83,10 @@
   margin-bottom: 10px;
 }
 
+.mt10 {
+  margin-top: 10px;
+}
+
 .adz-main-container .subheader {
   color: white;
 }
@@ -109,4 +113,16 @@
   margin: auto;
   width: 60px;
   height: 60px;
+}
+
+#canvas-wrapper {
+  width: 100%;
+}
+
+#canvas-wrapper canvas:first-child {
+  box-shadow: 0 0 0 3px #fff;
+}
+
+#content {
+  position: absolute;
 }
