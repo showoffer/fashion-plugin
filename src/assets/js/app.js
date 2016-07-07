@@ -187,7 +187,11 @@ function readImgFile(field, canvasCont, populateCanvas) {
   reader.onload = function (e) {
     image.onload = function () {
       OPTS.img = image;
-      $(canvasCont).height($(canvasCont).width() * image.height / image.width);
+      var tempContHeight = $(canvasCont).width() * image.height / image.width;
+      if (image.height < tempContHeight) {
+        tempContHeight = image.height;
+      }
+      $(canvasCont).height(tempContHeight);
       populateCanvas(image, canvasCont, saveBbox, saveAnnotation);
     };
     image.setAttribute('src', e.target.result);

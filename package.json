@@ -48,6 +48,6 @@
   },
   "private": true,
   "dependencies": {
-    "we-bbox": "^1.5.1"
+    "we-bbox": "^1.5.4"
   }
 }
