@@ -20,48 +20,30 @@ var OPTS = {
 };
 
 $('#' + OPTS.imgId).on('change', function (e) {
-  if (OPTS.bbox !== null) {
-    OPTS.bbox.dispose();
-  }
   readImgFile(getById(OPTS.imgId), getById(OPTS.canvasContainerId), populateCanvas);
 });
 $('#' + OPTS.searchByBtn).on('click', function (e) {
-  var a = OPTS.annotation,
-    imageData = prepareImgData(getBboxCanvas, a),
-    canvas = createCanvasFromData(imageData);
-  console.log(imageData);
-  // setSearchByImage(canvas);
-  sendForm(canvas);
+  sendForm(getById(OPTS.formId));
 });
 $('#' + OPTS.submitUrlId).on('click', function (e) {
   e.preventDefault();
-  readImgText(OPTS.imgTextId, getById, populateCanvas);
+  var imgTextInput = getById(OPTS.imgTextId);
+  if (imgTextInput.value !== '') {
+    readImgText(imgTextInput, getById(OPTS.canvasContainerId), populateCanvas);
+  }
 });
 
-function commonHandler (e) {
-  var form = document.getElementById(OPTS.formId);
-  clearInputs(e, form);
-  readImg(form);
-  sendForm(e, form);
-}
-
-function clearInputs (e, form) {
-  if (e.type === 'change') {
-    if (form[0].value !== '') {
-      form[0].value = '';
-    }
-    if (form[1].files.length === 0) {
-      return false;
-    }
+function disposeBbox() {
+  if (OPTS.bbox !== null) {
+    OPTS.bbox.dispose();
   }
 }
 
-function sendForm (canvas) {
+function sendForm (form) {
   var uri = OPTS.uriOk;
-  var fd = new FormData();
-  var imgFile = canvas.toDataURL();
+  var fd = new FormData(form);
 
-  fd.append('file-img', imgFile);
+  fd.append('bboxes', JSON.stringify([OPTS.annotation]));
 
   setSpinner(true);
 
@@ -69,11 +51,16 @@ function sendForm (canvas) {
     url: uri,
     data: fd,
     processData: false,
-    type: 'GET',
+    contentType: false,
+    type: 'POST',
     success: function(data){
       handleResponse(data, true);
+    },
+    complete: function (data) {
       setSpinner(false);
       $("html, body").animate({ scrollTop: $(document).height() }, 1500);
+      $(form).find(OPTS.imgTextId).val('');
+      $(form).find(OPTS.imgId).val('');
     }
   });
 
@@ -169,29 +156,35 @@ function readImg(form) {
 
 }
 
-function readImgText(fldId, getF, populateF) {
+function readImgText(field, canvasCont, populateCanvas) {
   var
-    image = document.createElement('img'),
-    canvasCont = getF(OPTS.canvasContainerId);
+    image = document.createElement('img');
+
+  // clear file input
+  getById(OPTS.imgId).value = '';
+
+  $(canvasCont).parent().removeClass('undisplay');
+  setSpinner(true);
   image.onload = function () {
-    populateF(image, canvasCont, saveBbox, saveAnnotation);
+    $(canvasCont).height(calcBboxHeight(image, canvasCont));
+    populateCanvas(image, canvasCont, saveBbox, saveAnnotation);
   };
-  image.setAttribute('src', getF(fldId).value);
+  image.setAttribute('src', field.value);
 }
 
 function readImgFile(field, canvasCont, populateCanvas) {
   var image = document.createElement('img'),
     reader = new FileReader();
+
+  // clear text input
+  getById(OPTS.imgTextId).value = '';
+
   $(canvasCont).parent().removeClass('undisplay');
   setSpinner(true);
   reader.onload = function (e) {
     image.onload = function () {
       OPTS.img = image;
-      var tempContHeight = $(canvasCont).width() * image.height / image.width;
-      if (image.height < tempContHeight) {
-        tempContHeight = image.height;
-      }
-      $(canvasCont).height(tempContHeight);
+      $(canvasCont).height(calcBboxHeight(image, canvasCont));
       populateCanvas(image, canvasCont, saveBbox, saveAnnotation);
     };
     image.setAttribute('src', e.target.result);
@@ -199,7 +192,16 @@ function readImgFile(field, canvasCont, populateCanvas) {
   reader.readAsDataURL(field.files[0]);
 }
 
+function calcBboxHeight (image, canvasCont) {
+  var tempContHeight = $(canvasCont).width() * image.height / image.width;
+  if (image.height < tempContHeight) {
+    tempContHeight = image.height;
+  }
+  return tempContHeight;
+}
+
 function populateCanvas (image, canvasCont, saveBbox, saveAnnotation) {
+  disposeBbox();
   var bbox = Bbox({
     canvasContainer: canvasCont,
     img: image,
@@ -210,7 +212,7 @@ function populateCanvas (image, canvasCont, saveBbox, saveAnnotation) {
   bbox.subscribe(function (annotation) {
     saveAnnotation(annotation)
   });
-  saveAnnotation({x1: 0, x2: $(canvasCont).width(), y1: 0, y2: $(canvasCont).height()});
+  saveAnnotation({x1: 0, x2: image.width, y1: 0, y2: image.height});
   saveBbox(bbox);
 }
 
